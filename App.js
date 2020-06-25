@@ -3,10 +3,14 @@ import { StyleSheet, Text, View } from "react-native";
 
 export default function App() {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>React native development</Text>
     </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 10,
+  },
+});
