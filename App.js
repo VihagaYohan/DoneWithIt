@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+
+import WelcomScreen from "./app/screens/WelcomeScreen";
+import ImageViewScreen from "./app/screens/ImageViewScreen";
+import ListingDetailsScreen from './app/screens/ListingDetailsScreen';
+import Card from "./app/components/Card";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>React native development</Text>
-    </View>
+    <ImageViewScreen/>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 10,
+    flex: 1,
+    paddingTop: 20,
   },
 });
