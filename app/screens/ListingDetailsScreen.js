@@ -3,7 +3,7 @@ import { StyleSheet, View, Image } from "react-native";
 
 import Colors from "../config/Color";
 import AppText from "../components/AppText";
-import ListItem from "../components/ListItem";
+import ListItem from "../components/list/ListItem";
 
 const ListingDetailsScreen = () => {
   return (

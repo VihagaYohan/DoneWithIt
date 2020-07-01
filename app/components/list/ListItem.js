@@ -7,10 +7,11 @@ import {
   TouchableHighlight,
 } from "react-native";
 
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Swipable from "react-native-gesture-handler/Swipeable";
 
-import AppText from "../components/AppText";
-import Colors from "../config/Color";
+import AppText from "../AppText";
+import defaultStyles from "../../config/DefaultStyles";
 
 const ListItem = ({
   image,
@@ -22,14 +23,26 @@ const ListItem = ({
 }) => {
   return (
     <Swipable renderRightActions={rightActions}>
-      <TouchableHighlight underlayColor={Colors.light} onPress={onPress}>
+      <TouchableHighlight
+        underlayColor={defaultStyles.colors.light}
+        onPress={onPress}
+      >
         <View style={styles.container}>
           {IconComponent}
           {image && <Image style={styles.image} source={image} />}
           <View style={styles.detailsContainer}>
             <AppText style={styles.title}>{title}</AppText>
-            {subTitle && <AppText style={styles.subTitle}>{subTitle}</AppText>}
+            {subTitle && (
+              <AppText style={styles.subTitle} numberOfLines={2}>
+                {subTitle}
+              </AppText>
+            )}
           </View>
+          <MaterialCommunityIcons
+            name="chevron-left"
+            size={20}
+            color={defaultStyles.colors.medium}
+          />
         </View>
       </TouchableHighlight>
     </Swipable>
@@ -39,8 +52,9 @@ const ListItem = ({
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
+    alignItems: "center",
     padding: 15,
-    backgroundColor:Colors.white
+    backgroundColor: defaultStyles.colors.white,
   },
   image: {
     height: 70,
@@ -50,6 +64,7 @@ const styles = StyleSheet.create({
   },
   detailsContainer: {
     flexDirection: "column",
+    flex: 1,
     left: 10,
     justifyContent: "center",
   },
@@ -57,7 +72,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   subTitle: {
-    color: Colors.medium,
+    color: defaultStyles.colors.medium,
     fontSize: 14,
   },
 });

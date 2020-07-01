@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
 
-import Colors from "../config/Color";
+import Colors from "../../config/Color";
 
 const ListItemSeparator = () => {
   return <View style={styles.separator}></View>;

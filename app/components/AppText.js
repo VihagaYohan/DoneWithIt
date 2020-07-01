@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import {StyleSheet,Text} from 'react-native'
 
+import defaultStyles from '../config/DefaultStyles'; // import default styles
 
-const AppText = ({children, style})=>{
+const AppText = ({children, style, ...otherProps})=>{
     return(
-    <Text style={[styles.text, style]}>{children}</Text>
+    <Text style={[defaultStyles.text, style]} {...otherProps}>{children}</Text>
     )
 }
 
