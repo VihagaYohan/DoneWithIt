@@ -1,7 +1,10 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 
 import * as Yup from "yup"; // import yup for error validations
+import * as Location from "expo-location"; // location
+
+import Screen from "./../components/Screen";
 
 import {
   AppForm,
@@ -78,45 +81,60 @@ const categories = [
 ];
 
 const ListEditScreen = () => {
-  return (
-    <AppForm
-      initialValues={{
-        title: "",
-        price: "",
-        description: "",
-        category: null,
-        images:[]
-      }}
-      onSubmit={(values) => console.log(values)}
-      validationSchema={validationSchema}
-    >
-      <FormImagePicker name='images'/>
-      <AppFormField name="title" placeholder="Title" maxLength={50} />
-      <AppFormField
-        name="price"
-        placeholder="Price"
-        maxLength={8}
-        width="50%"
-        keyboardType="numeric"
-      />
-      <AppFormPicker
-        items={categories}
-        name="category"
-        placeholder="Category"
-        PickerItemComponent={CategoryPickerItem}
-        numberOfColumns={3}
-        width="50%"
-      />
-      <AppFormField
-        name="description"
-        placeholder="Description"
-        multiLine={true}
-        maxLength={500}
-        numberOfLines={3}
-      />
+  const [location, setLocation] = useState();
 
-      <SubmitButton title="Post" />
-    </AppForm>
+  const getLocation = async () => {
+    const { granted } = await Location.requestPermissionsAsync();
+    if (!granted) return;
+    const {
+      coords: { latitude, longitude },
+    } = await Location.getCurrentPositionAsync();
+    setLocation(latitude, longitude);
+  };
+  useEffect(() => {
+    getLocation();
+  }, []);
+  return (
+    <Screen>
+      <AppForm
+        initialValues={{
+          title: "",
+          price: "",
+          description: "",
+          category: null,
+          images: [],
+        }}
+        onSubmit={(values) => console.log(location)}
+        validationSchema={validationSchema}
+      >
+        <FormImagePicker name="images" />
+        <AppFormField name="title" placeholder="Title" maxLength={50} />
+        <AppFormField
+          name="price"
+          placeholder="Price"
+          maxLength={8}
+          width="50%"
+          keyboardType="numeric"
+        />
+        <AppFormPicker
+          items={categories}
+          name="category"
+          placeholder="Category"
+          PickerItemComponent={CategoryPickerItem}
+          numberOfColumns={3}
+          width="50%"
+        />
+        <AppFormField
+          name="description"
+          placeholder="Description"
+          multiLine={true}
+          maxLength={500}
+          numberOfLines={3}
+        />
+
+        <SubmitButton title="Post" />
+      </AppForm>
+    </Screen>
   );
 };
 

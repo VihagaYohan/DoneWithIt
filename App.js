@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, TextInput, Text, Button, Image } from "react-native";
 
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { NavigationContainer,DefaultTheme } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import defaultStyles from './app/config/DefaultStyles';
+
 /* screens and components */
 import WelcomScreen from "./app/screens/WelcomeScreen";
 import ImageViewScreen from "./app/screens/ImageViewScreen";
@@ -18,24 +23,25 @@ import Screen from "./app/components/Screen";
 import ImageInputList from "./app/components/image/ImageInputList";
 import ImageInput from "./app/components/image/ImageInput";
 
+// navigators
+import AuthNavigator from "./app/navigation/AuthNavigator";
+import AppNavigator from './app/navigation/AppNavigator';
+import navigationTheme from "./app/navigation/navigationTheme";
+
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'rgb(255, 45, 85)',
+  },
+};
+
 export default function App() {
-  const [imageUris, setImageUris] = useState([]);
-
-  const handleAdd = (uri) => {
-    setImageUris([...imageUris, uri]);
-  };
-
-  const handleRemove = (uri) => {
-    setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
-  };
-
+  console.log(navigationTheme)
   return (
-    <ListEditScreen />
-    /*  <ImageInputList
-      imageUris={imageUris}
-      onAddImage={handleAdd}
-      onRemoveImage={handleRemove}
-    /> */
+    <NavigationContainer theme={MyTheme}>
+      <AppNavigator />
+    </NavigationContainer>
   );
 }
 

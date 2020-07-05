@@ -5,13 +5,15 @@ import Colors from "../config/Color";
 import AppText from "../components/AppText";
 import ListItem from "../components/list/ListItem";
 
-const ListingDetailsScreen = () => {
+const ListingDetailsScreen = ({ route }) => {
+  const listings = route.params;
+
   return (
     <View>
-      <Image style={styles.image} source={require("../assets/jacket.jpg")} />
+      <Image style={styles.image} source={listings.image} />
       <View style={styles.detailsContainer}>
-        <AppText style={styles.title}>Red jacket for sale</AppText>
-        <AppText style={styles.price}>$100</AppText>
+        <AppText style={styles.title}>{listings.title}</AppText>
+        <AppText style={styles.price}>${listings.price}</AppText>
         <View style={styles.userContainer}>
           <ListItem
             image={require("../assets/mosh.jpg")}
@@ -42,9 +44,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginVertical: 10,
   },
-  userContainer:{
-    marginVertical:40
-  }
+  userContainer: {
+    marginVertical: 40,
+  },
 });
 
 export default ListingDetailsScreen;
